@@ -175,4 +175,63 @@ export LSCOLORS=ExCxBxDxCxegedabagacad
 # Enabling colors for ls command
 alias ls='ls -G'
 
+
+###### MACOS stuff truly
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/ehz/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/ehz/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/ehz/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/ehz/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+function parse_git_branch() {
+    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p'
+}
+
+# ANSI Color Codes: Brown = 130, Crimson = 160
+COLOR_DEF=$'%f'
+COLOR_USR=$'%F{130}'  # Brown
+COLOR_DIR=$'%F{177}'  # No change, assuming you're comfortable with it
+COLOR_GIT=$'%F{197}'  # Crimson
+setopt PROMPT_SUBST
+
+export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF} $ '
+
+# Or for light cyan directories
+export LSCOLORS=ExCxBxDxCxegedabagacad
+
+# Enabling colors for ls command
+alias ls='ls -G'
+
+export PATH=$PATH:/Users/ehz/nvim-macos/bin
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+export PATH=/usr/local/bin:$PATH
+
+export LDFLAGS="-framework CoreFoundation -framework Carbon $LDFLAGS"
+export PATH="/usr/local/ssl/bin:$PATH"
+
+export PKG_CONFIG_PATH="/usr/local/ssl/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+export CMAKE_TOOLCHAIN_FILE="/Users/ehz/vcpkg/scripts/buildsystems/vcpkg.cmake"
+
+export PATH="$HOME/vcpkg:$PATH"
+export SSL_CERT_FILE=~/certs/cacert.pem
+export DYLD_LIBRARY_PATH=/usr/local/lib:$DYLD_LIBRARY_PATH
 ```
